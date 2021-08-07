@@ -83,15 +83,28 @@ public class HCL_UCDemo {
         Assert.assertTrue(branding.readAndStoreSubtext());
     }
 
+
+    @Test()
+    public void UC_6DummyFail(){
+        test = extent.createTest(Thread.currentThread().getStackTrace()[1].getMethodName()+" Started....");
+        Assert.fail();
+    }
+
+    @Test()
+    public void UC_6DummyPass(){
+        test = extent.createTest(Thread.currentThread().getStackTrace()[1].getMethodName()+" Started....");
+        Assert.assertTrue(true);
+    }
+
     @AfterMethod
     public void getResult(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " FAILED ", ExtentColor.RED));
+            test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " .....FAILED ", ExtentColor.RED));
             test.fail(result.getThrowable());
         } else if (result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " PASSED ", ExtentColor.GREEN));
+            test.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " ..... PASSED ", ExtentColor.GREEN));
         } else {
-            test.log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " SKIPPED ", ExtentColor.ORANGE));
+            test.log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " .....SKIPPED ", ExtentColor.ORANGE));
             test.skip(result.getThrowable());
         }
     }
