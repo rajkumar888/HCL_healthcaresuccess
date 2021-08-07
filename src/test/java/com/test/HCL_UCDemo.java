@@ -47,7 +47,7 @@ public class HCL_UCDemo {
         //configuration items to change the look and feel
         htmlReporter.config().setChartVisibilityOnOpen(true);
         htmlReporter.config().setDocumentTitle("HCL Extent Report");
-        htmlReporter.config().setReportName("THCL est Report");
+        htmlReporter.config().setReportName("HCL Test Report");
         htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
         htmlReporter.config().setTheme(Theme.DARK);
         htmlReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
