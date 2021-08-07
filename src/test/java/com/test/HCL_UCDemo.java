@@ -1,17 +1,11 @@
 package com.test;
 
+import com.pages.Branding;
 import com.utils.Drivers;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -29,41 +23,40 @@ public class HCL_UCDemo {
     @BeforeMethod
     public void setup(String browser) {
 
+        PropertyConfigurator.configure("log4j.properties");
+
         if (browser.equalsIgnoreCase("chrome")) {
-            System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "True");
-            WebDriverManager.chromedriver().setup();
             driver = new Drivers().launchDriver("chrome");
             log.info("Chrome Browser launched !!!");
 
         } else if (browser.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/geckodriver.exe");
-            driver = new Drivers().launchDriver("chrome");
+            driver = new Drivers().launchDriver("firefox");
             log.info("Firefox Browser launched !!!");
         }
 
-        log.info("Open healthcaresuccess.com website ");
+        log.info("Open website healthcaresuccess.com  ");
         driver.manage().window().maximize();
-        driver.get("https://healthcaresuccess.com/marketing-services/branding");
+        driver.get("https://healthcaresuccess.com/");
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
     @Test
     public void UC_5() throws InterruptedException {
-        WebElement element;
-        log.info("User has navigated to Branding Page");
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        Actions actions = new Actions(driver);
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        Branding branding = new Branding(driver);
+        branding.navigateToBrandingPage();
 
-//        element = driver.findElement(By.xpath("//img[@alt='Make My Trip']"));
-//        js.executeScript("arguments[0].click();", element);
-
+        String expectedTitle="Healthcare Branding Services to Differentiate You From the Competition";
+        String actualTitle=branding.getBrandingPageTitle();
+        Assert.assertEquals(expectedTitle,actualTitle,"Title didn't match");
+        Assert.assertTrue(branding.readAndStoreHeader1());
+        Assert.assertTrue(branding.readAndStoreHeader2());
+        Assert.assertTrue(branding.readAndStoreSubtext());
     }
 
     @AfterMethod
     public void tearDown() {
-        log.info("Method to close the browser ");
-//        driver.quit();
+        log.info("Method to close the browser");
+        driver.quit();
     }
 
 }

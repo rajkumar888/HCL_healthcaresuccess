@@ -12,10 +12,12 @@ import java.util.List;
 public class GenericUtil {
     WebDriver driver;
     WebDriverWait webDriverWait;
+    JavascriptExecutor js;
 
     public GenericUtil(final WebDriver driver) {
         this.driver = driver;
         webDriverWait = new WebDriverWait(driver, 30);
+        js= (JavascriptExecutor) driver;
     }
 
     ///Generic Methods
@@ -119,7 +121,6 @@ public class GenericUtil {
     public boolean jsScrollUp() {
         boolean flag = false;
         try {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollBy(0,-350)");
             flag = true;
         } catch (Exception e) {
@@ -131,7 +132,6 @@ public class GenericUtil {
     public boolean jsScrollDown() {
         boolean flag = false;
         try {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollBy(0,350)");
             flag = true;
         } catch (Exception e) {
@@ -140,5 +140,9 @@ public class GenericUtil {
         return flag;
     }
 
+
+    public void jsScrollToElement(WebElement element){
+        js.executeScript("arguments[0].scrollIntoView();",element );
+    }
 
 }
