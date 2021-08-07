@@ -32,13 +32,11 @@ public class HCL_UCDemo {
         if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "True");
             WebDriverManager.chromedriver().setup();
-//            driver = new ChromeDriver();
             driver = new Drivers().launchDriver("chrome");
             log.info("Chrome Browser launched !!!");
 
         } else if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/geckodriver.exe");
-//            driver = new FirefoxDriver();
             driver = new Drivers().launchDriver("chrome");
             log.info("Firefox Browser launched !!!");
         }
