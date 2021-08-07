@@ -45,7 +45,6 @@ public class HCL_UCDemo {
         extent.setSystemInfo("Browser", browser);
 
         //configuration items to change the look and feel
-        //add content, manage tests etc
         htmlReporter.config().setChartVisibilityOnOpen(true);
         htmlReporter.config().setDocumentTitle("HCL Extent Report");
         htmlReporter.config().setReportName("THCL est Report");
@@ -62,7 +61,7 @@ public class HCL_UCDemo {
             log.info("Firefox Browser launched !!!");
         }
 
-        log.info("Open website healthcaresuccess.com  ");
+        log.info("Opening website healthcaresuccess.com  ");
         driver.manage().window().maximize();
         driver.get("https://healthcaresuccess.com/");
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
@@ -71,7 +70,7 @@ public class HCL_UCDemo {
     @Test
     public void UC_5() throws InterruptedException {
 
-        test = extent.createTest("UC_5", "UC 5 Started....");
+        test = extent.createTest(Thread.currentThread().getStackTrace()[1].getMethodName()+" Started....");
 
         Branding branding = new Branding(driver);
         branding.navigateToBrandingPage();
