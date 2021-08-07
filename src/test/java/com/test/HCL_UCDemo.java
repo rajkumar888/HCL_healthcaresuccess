@@ -1,5 +1,6 @@
 package com.test;
 
+import com.utils.Drivers;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -31,38 +32,40 @@ public class HCL_UCDemo {
         if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "True");
             WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+//            driver = new ChromeDriver();
+            driver = new Drivers().launchDriver("chrome");
             log.info("Chrome Browser launched !!!");
 
         } else if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/geckodriver.exe");
-            driver = new FirefoxDriver();
+//            driver = new FirefoxDriver();
+            driver = new Drivers().launchDriver("chrome");
             log.info("Firefox Browser launched !!!");
         }
 
         log.info("Open healthcaresuccess.com website ");
         driver.manage().window().maximize();
-        driver.get("https://healthcaresuccess.com/");
+        driver.get("https://healthcaresuccess.com/marketing-services/branding");
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
     @Test
     public void UC_5() throws InterruptedException {
         WebElement element;
-        log.info("User has navigated to Brandign Page");
+        log.info("User has navigated to Branding Page");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Actions actions = new Actions(driver);
         WebDriverWait wait = new WebDriverWait(driver, 20);
 
-        element = driver.findElement(By.xpath("//img[@alt='Make My Trip']"));
-        js.executeScript("arguments[0].click();", element);
+//        element = driver.findElement(By.xpath("//img[@alt='Make My Trip']"));
+//        js.executeScript("arguments[0].click();", element);
 
     }
 
     @AfterMethod
     public void tearDown() {
         log.info("Method to close the browser ");
-        driver.quit();
+//        driver.quit();
     }
 
 }

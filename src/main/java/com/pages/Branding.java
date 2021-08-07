@@ -8,11 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-public class MakeMyTripPage {
+public class Branding {
 
     WebDriver driver;
     WebDriverWait webDriverWait;
@@ -20,10 +16,10 @@ public class MakeMyTripPage {
 
     public String checkOutTotalPrice;
     public String cartTotalPrice;
-    public static Logger log = Logger.getLogger(MakeMyTripPage.class);
+    public static Logger log = Logger.getLogger(Branding.class);
 
 
-    public MakeMyTripPage(WebDriver driver) {
+    public Branding(WebDriver driver) {
         this.driver = driver;
         webDriverWait = new WebDriverWait(driver, 30);
         genericUtil = new GenericUtil(driver);
